@@ -24,7 +24,7 @@ export async function GET(req: Request) {
                 resolveWithObject: true
             });
 
-        const encodedImage = blurhash.encode(
+        const hash = blurhash.encode(
             new Uint8ClampedArray(data),
             info.width,
             info.height,
@@ -33,7 +33,7 @@ export async function GET(req: Request) {
         )
 
         return NextResponse.json({
-            encodedImage
+            hash
         })
     } catch (err) {
         return NextResponse.json({
