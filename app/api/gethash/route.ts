@@ -13,7 +13,11 @@ export async function GET(req: Request) {
     })
 
     try {
-        const image = await fetch(url);
+        const image = await fetch(url, {
+            next: {
+                revalidate: 120
+            }
+        });
         const buffer = Buffer.from(await image.arrayBuffer())
 
         const { data, info } = await sharp(buffer)
